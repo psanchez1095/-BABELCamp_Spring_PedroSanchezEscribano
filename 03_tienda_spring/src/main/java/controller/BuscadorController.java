@@ -34,29 +34,21 @@ public class BuscadorController {
 		return "addPagina";
 	}
 
-	/*@PostMapping(value = "AddPagina")
-	public String añadirPagina(@RequestParam("tematica") String tematica,
-			@RequestParam("url") String url,
-			@RequestParam("desc") String desc) {
-		bs.alta(new Pagina(url, tematica, desc));
-		return "datos";
-	}*/
-	
 	@PostMapping(value = "Alta")
 	public String añadirProducto(@ModelAttribute Producto product) {
 		bs.alta(product);
 		return "datos";
 	}
-	
+
 	@GetMapping(value = "Eliminar")
 	public String eliminarProducto(@RequestParam("nombre") String nombre) {
 		bs.baja(nombre);
 		return "datos";
 	}
-	
+
 	@GetMapping(value = "Modificar")
-	public String modificarProducto(@RequestParam("nombre") String nombre,@RequestParam("precio") String precio) {
-		bs.modificar(new Producto(nombre,"",Double.parseDouble(precio),-1));
+	public String modificarProducto(@RequestParam("nombre") String nombre, @RequestParam("precio") String precio) {
+		bs.modificar(new Producto(nombre, "", Double.parseDouble(precio), -1));
 		return "datos";
 	}
 
