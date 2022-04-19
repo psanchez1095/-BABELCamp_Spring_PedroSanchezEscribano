@@ -14,11 +14,12 @@ public interface BuscadorService {
 	List<Producto> buscar(String tematica);
 	
 	/** 
+	 *  Metodo que se encargar de dar de alta un producto en el sistema
 	 * @param p parametro de tipo Producto a dar de alta
 	 * */
 	void alta(Producto p);
 	/** 
-	 * Metodo que se encargar de dar de alta un producto en el sistema
+	 * Metodo que se encargar de eliminar un producto en el sistema
 	 * @param nombreProducto parametro string que contiene el nombre del vehiculo
 	 * que se va a eliminar 
 	 * */
