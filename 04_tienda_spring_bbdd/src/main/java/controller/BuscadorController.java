@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,16 @@ public class BuscadorController {
 	@GetMapping(value = "Buscador")
 	public String buscar(@RequestParam("seccion") String seccion, HttpServletRequest request) {
 		List<Producto> productos = bs.buscar(seccion);
+		request.setAttribute("productos", productos);
+		// El return le dice a Spring a que vista ir
+		return "listado";
+	}
+	
+	@GetMapping(value = "BuscadorId")
+	public String buscarPorId(@RequestParam("id") String id, HttpServletRequest request) {
+		List<Producto> productos = new ArrayList();
+		Producto producto= bs.buscar(Integer.parseInt(id));
+		productos.add(producto);
 		request.setAttribute("productos", productos);
 		// El return le dice a Spring a que vista ir
 		return "listado";

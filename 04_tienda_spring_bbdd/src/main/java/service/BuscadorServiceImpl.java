@@ -48,4 +48,17 @@ public class BuscadorServiceImpl implements BuscadorService {
 		template.update(sql, p.getPrecio(),p.getNombre());
 	}
 
+	@Override
+	public Producto buscar(int id) {
+		List<Producto> list  = template.query("SELECT * FROM productos WHERE id LIKE ?", 
+				 (rs,f)->new Producto(rs.getInt("id"),
+				 rs.getString("nombre"),
+				 rs.getString("seccion"),
+				 rs.getDouble("precio"),
+				 rs.getInt("stock")),
+				 id);
+		return list.size()>0 ? list.get(0) : null;
+	}
+
+
 }

@@ -10,6 +10,11 @@
 			Sección:<input type="text" name="seccion"><br>
 			<input type="submit" value="Ver productos">
 		</form>
+		<form action="BuscadorId">
+			Id:<input type="text" name="id"><br>
+			<input type="submit" value="Ver productos">
+		</form>
+		
 		<br>
 		<a href="inicio.jsp">Inicio</a>
 	</center>
