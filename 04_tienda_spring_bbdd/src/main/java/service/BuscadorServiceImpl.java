@@ -1,8 +1,6 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,7 +20,13 @@ public class BuscadorServiceImpl implements BuscadorService {
 
 	@Override
 	public List<Producto> buscar(String seccion) {
-		 return template.query("SELECT * FROM productos WHERE seccion LIKE ?", new Producto(), seccion);
+		 return template.query("SELECT * FROM productos WHERE seccion LIKE ?", 
+				 (rs,f)->new Producto(rs.getInt("id"),
+				 rs.getString("nombre"),
+				 rs.getString("seccion"),
+				 rs.getDouble("precio"),
+				 rs.getInt("stock")),
+				 seccion);
 	}
 
 	@Override
