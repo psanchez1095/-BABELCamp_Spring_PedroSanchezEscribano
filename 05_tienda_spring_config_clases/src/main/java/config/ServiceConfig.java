@@ -2,23 +2,36 @@ package config;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+@PropertySource(value = "classpath:/config/application.properties")
 @Configuration
 @ComponentScan(basePackages = {"service"})
 public class ServiceConfig {
-
+	
+	@Value("${driver}")
+	String driver;
+	@Value("${url}")
+	String url;
+	@Value("${usuario}")
+	String usuario;
+	@Value("${pwd}")
+	String contraseña;
+	
+	
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource data = new DriverManagerDataSource();
-		data.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		data.setUrl("jdbc:mysql://localhost:3306/tienda_spring");
-		data.setUsername("root");
-		data.setPassword("");
+		data.setDriverClassName(driver);
+		data.setUrl(url);
+		data.setUsername(usuario);
+		data.setPassword(contraseña);
 		return data;
 	}
 	
