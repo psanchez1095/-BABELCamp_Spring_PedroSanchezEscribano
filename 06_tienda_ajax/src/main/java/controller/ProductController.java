@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import model.Producto;
 import service.BuscadorService;
 
+//Para no bloquear el acceso de otra direcciones
+@CrossOrigin("*")
 @Controller
 public class ProductController {
 
@@ -37,6 +40,7 @@ public class ProductController {
 		Producto producto= bs.buscar(Integer.parseInt(id));
 		productos.add(producto);
 		request.setAttribute("productos", productos);
+		
 		// El return le dice a Spring a que vista ir
 		return "listado";
 	}
