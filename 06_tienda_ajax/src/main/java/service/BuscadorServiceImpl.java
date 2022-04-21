@@ -51,7 +51,7 @@ public class BuscadorServiceImpl implements BuscadorService {
 	@Override
 	public Producto buscar(int id) {
 		List<Producto> list  = template.query("SELECT * FROM productos WHERE id LIKE ?", 
-				 (rs,f)->new Producto(rs.getInt("id"),
+				 (rs,f)->new Producto(rs.getInt("idProducto"),
 				 rs.getString("nombre"),
 				 rs.getString("seccion"),
 				 rs.getDouble("precio"),
