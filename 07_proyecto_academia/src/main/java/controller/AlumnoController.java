@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import model.Alumno;
 import service.BuscadorService;
 
+@CrossOrigin("*")
 @Controller
 public class AlumnoController {
 
@@ -28,7 +30,6 @@ public class AlumnoController {
 	public @ResponseBody List<Alumno> buscar(@RequestParam("curso") String curso, HttpServletRequest request) {
 		return bs.buscar(curso);		
 	}
-	
 	
 	@GetMapping(value = "BuscadorId")
 	public String buscarPorId(@RequestParam("id") String id, HttpServletRequest request) {
@@ -58,10 +59,10 @@ public class AlumnoController {
 		return "datos";
 	}
 	
-	@GetMapping(value = "BuscarCursos")
-	public String buscarCursos() {
-		bs.cursos();
-		return "datos";
+	@GetMapping(value = "BuscarCursos",produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<String> buscarCursos(HttpServletRequest request) {
+		List<String> list = bs.cursos();
+		return list;
 	}
 
 }
