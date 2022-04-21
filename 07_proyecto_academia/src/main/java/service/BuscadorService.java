@@ -30,11 +30,14 @@ public interface BuscadorService {
 	 * @param nombreProducto parametro string que contiene el nombre del vehiculo
 	 * que se va a eliminar 
 	 * */
-	void baja(String nombreProducto);
+	void baja(String nombreAlumno);
 	
 	/** 
 	 * Metodo que se encargar de modificar un producto existente en el sistema
 	 * @param p parametro de tipo Producto a modificar 
 	 * */
 	void modificar(Alumno p);
+	
+	boolean existeAlumno(String nombreAlumno);
+	List<String> cursos();
 }

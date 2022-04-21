@@ -6,8 +6,8 @@
 </head>
 <body>
 	<center>
-		<a href="datos.html">Búsquedas</a><br>
-		<a href="alta.html">Altas</a><br>
+		<a href="datos.jsp">Búsquedas</a><br>
+		<a href="alta.jsp">Altas</a><br>
 	</center>
 </body>
 </html>

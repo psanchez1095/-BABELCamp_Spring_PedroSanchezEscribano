@@ -31,8 +31,10 @@ public class BuscadorServiceImpl implements BuscadorService {
 
 	@Override
 	public void alta(Alumno p) {
+		if(!existeAlumno(p.getNombre())) {
 		String sql ="insert into alumnos(nombre,curso,nota) values(?,?,?)";
 		template.update(sql, p.getNombre(),p.getCurso(),p.getNota());
+		}
 	}
 
 	@Override
@@ -57,6 +59,23 @@ public class BuscadorServiceImpl implements BuscadorService {
 				 rs.getInt("nota")),
 				 id);
 		return list.size()>0 ? list.get(0) : null;
+	}
+
+	@Override
+	public boolean existeAlumno(String nombre) {
+		List<Alumno> list  = template.query("SELECT * FROM alumnos WHERE nombre LIKE ?", 
+				 (rs,f)->new Alumno(rs.getInt("idAlumno"),
+				 rs.getString("nombre"),
+				 rs.getString("curso"),
+				 rs.getInt("nota")),
+				 nombre);
+		return list.size()>0 ? true : false;
+	}
+
+	@Override
+	public List<String> cursos() {
+		String sql = "select distinct(curso) from alumnos";
+		return template.query(sql, (r,f)->r.getString(1));
 	}
 
 

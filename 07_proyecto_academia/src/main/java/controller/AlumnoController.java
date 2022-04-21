@@ -40,26 +40,27 @@ public class AlumnoController {
 		return "listado";
 	}
 
-	@GetMapping(value = "RouteAddProducto")
-	public String routeAddProducto(HttpServletRequest request) {
-		return "addPagina";
-	}
-
 	@PostMapping(value = "Alta")
-	public String añadirProducto(@ModelAttribute Alumno product) {
+	public String añadirAlumno(@ModelAttribute Alumno product) {
 		bs.alta(product);
-		return "datos";
+		return "inicio";
 	}
 
 	@GetMapping(value = "Eliminar")
-	public String eliminarProducto(@RequestParam("nombre") String nombre) {
+	public String eliminarAlumno(@RequestParam("nombre") String nombre) {
 		bs.baja(nombre);
 		return "datos";
 	}
 
 	@GetMapping(value = "Modificar")
-	public String modificarProducto(@RequestParam("nombre") String nombre, @RequestParam("precio") String precio) {
+	public String modificarAlumno(@RequestParam("nombre") String nombre, @RequestParam("precio") String precio) {
 		bs.modificar(new Alumno(-1,nombre, "", Integer.parseInt(precio)));
+		return "datos";
+	}
+	
+	@GetMapping(value = "BuscarCursos")
+	public String buscarCursos() {
+		bs.cursos();
 		return "datos";
 	}
 

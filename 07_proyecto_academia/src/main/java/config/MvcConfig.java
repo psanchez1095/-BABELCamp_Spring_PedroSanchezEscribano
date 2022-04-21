@@ -18,7 +18,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	public InternalResourceViewResolver resolver() {
 		InternalResourceViewResolver res = new InternalResourceViewResolver();
 		res.setPrefix("/");
-		res.setSuffix(".html");
+		res.setSuffix(".jsp");
 		return res;
 	}
 
