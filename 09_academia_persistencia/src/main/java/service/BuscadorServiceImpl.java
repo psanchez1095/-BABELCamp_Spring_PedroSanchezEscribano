@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,21 +25,28 @@ public class BuscadorServiceImpl implements BuscadorService {
 	@Override
 	@Transactional
 	public List<Alumno> buscarPorCurso(String curso) {
-		// TODO Auto-generated method stub
-		return null;
+	// TODO Auto-generated method stub
+		
+		TypedQuery<Alumno> query;
+		query = entityManager.createNamedQuery("Alumno.findByCurso", Alumno.class);
+		query.setParameter("curso", curso);
+		
+		List<Alumno> resultList = query.getResultList();
+		
+		
+		 return resultList;
 	}
 
 	@Override
 	@Transactional
 	public Alumno buscar(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Alumno.class, id);
 	}
 
 	@Override
 	@Transactional
 	public void alta(Alumno p) {
-		// TODO Auto-generated method stub
+		entityManager.persist(p);
 		
 	}
 
@@ -59,22 +67,31 @@ public class BuscadorServiceImpl implements BuscadorService {
 	@Override
 	@Transactional
 	public boolean existeAlumno(String nombreAlumno) {
-		// TODO Auto-generated method stub
-		return false;
+		if(buscarPorNombre(nombreAlumno)!=null) return true;
+		else return false;
 	}
 
 	@Override
 	@Transactional
 	public List<String> cursos() {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<String> query;
+		query = entityManager.createNamedQuery("Alumno.findCursos", String.class);
+		return query.getResultList();
+		
 	}
 
 	@Override
 	@Transactional
 	public List<Alumno> buscarPorNombre(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		TypedQuery<Alumno> query;
+		query = entityManager.createNamedQuery("Alumno.findByNombre", Alumno.class);
+		query.setParameter("nombre", nombre);
+		
+		List<Alumno> resultList = query.getResultList();
+		
+		
+		 return resultList;
 	}
 
 	

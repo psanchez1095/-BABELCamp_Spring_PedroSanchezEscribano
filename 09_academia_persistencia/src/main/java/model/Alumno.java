@@ -19,13 +19,14 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "alumnos")
-@NamedQuery(name = "Alumno.findBySeccion", query = "select obj from Alumno obj where obj.curso = :curso")
+@NamedQuery(name = "Alumno.findByCurso", query = "select obj from Alumno obj where obj.curso = :curso")
 @NamedQuery(name = "Alumno.findByNombre", query = "select obj from Alumno obj where obj.nombre = :nombre")
+@NamedQuery(name = "Alumno.findCursos", query = "select DISTINCT(obj.curso) from Alumno obj")
 public class Alumno{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idProducto;
+	private int idAlumno;
 	@Column(name="nombre")
 	private String nombre;
 	@Column(name="curso")
