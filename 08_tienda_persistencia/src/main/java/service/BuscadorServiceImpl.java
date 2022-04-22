@@ -21,8 +21,10 @@ public class BuscadorServiceImpl implements BuscadorService {
 	//Inyecta Entity Manager
 	@PersistenceContext
 	EntityManager entityManager;
+	
+	@Transactional
 	@Override
-	public List<Producto> buscar(String seccion) {
+	public List<Producto> buscarPorSeccion(String seccion) {
 		
 		// TODO Auto-generated method stub
 		
@@ -33,16 +35,31 @@ public class BuscadorServiceImpl implements BuscadorService {
 		List<Producto> resultList = query.getResultList();
 		
 		
-		
 		 return resultList;
 
 	}
 
+	@Transactional
+	@Override
+	public Producto buscarPorNombre(String nombre) {
+
+		TypedQuery<Producto> query;
+		query = entityManager.createNamedQuery("Producto.findByNombre", Producto.class);
+		query.setParameter("nombre", nombre);
+		
+		List<Producto> resultList = query.getResultList();
+		
+		
+		 return resultList.size()>0 ? resultList.get(0) : null;
+	}
+	
+	@Transactional
 	@Override
 	public Producto buscar(int id) {
 		// TODO Auto-generated method stub
 		return entityManager.find(Producto.class, id);
 	}
+	
 	
 	@Transactional
 	@Override
@@ -51,17 +68,21 @@ public class BuscadorServiceImpl implements BuscadorService {
 		
 	}
 
+	@Transactional
 	@Override
 	public void baja(String nombreProducto) {
 		
+		Producto aux = buscarPorNombre(nombreProducto);
+		if(aux != null )entityManager.remove(aux);
 		
 	}
-
+	@Transactional
 	@Override
 	public void modificar(Producto p) {
-		// TODO Auto-generated method stub
+		entityManager.merge(p);
 		
 	}
+	
 	
 	
 

@@ -31,8 +31,7 @@ public class ProductController {
 	//Con la propiedad produces indicas que el cuerpo se formatea a json
 	@GetMapping(value = "Buscador",produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<Producto> buscar(@RequestParam("seccion") String seccion, HttpServletRequest request) {
-		System.out.println("godsadasd");
-		return bs.buscar(seccion);		
+		return bs.buscarPorSeccion(seccion);		
 	}
 	
 	@GetMapping(value = "BuscadorId")
@@ -65,7 +64,9 @@ public class ProductController {
 
 	@GetMapping(value = "Modificar")
 	public String modificarProducto(@RequestParam("nombre") String nombre, @RequestParam("precio") String precio) {
-		bs.modificar(new Producto(-1,nombre, "", Double.parseDouble(precio), -1));
+		Producto aux = bs.buscarPorNombre(nombre);
+		if(aux!=null) aux.setPrecio(Double.parseDouble(precio));
+		bs.modificar(aux);
 		return "datos";
 	}
 

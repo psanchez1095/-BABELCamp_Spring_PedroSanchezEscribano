@@ -20,6 +20,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "productos")
 @NamedQuery(name = "Producto.findBySeccion", query = "select obj from Producto obj where obj.seccion = :seccion")
+@NamedQuery(name = "Producto.findByNombre", query = "select obj from Producto obj where obj.nombre = :nombre")
 public class Producto{
 	
 	@Id
