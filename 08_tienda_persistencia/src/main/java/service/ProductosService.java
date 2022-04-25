@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Producto;
 
-public interface BuscadorService {
+public interface ProductosService {
 	
 	/**
 	 * Metodo que se encargar de buscar los productos de la tematica que le llega por parametro

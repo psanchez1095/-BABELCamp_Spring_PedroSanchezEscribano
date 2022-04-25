@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Producto;
-import service.BuscadorService;
+import service.ProductosService;
 
 //Para no bloquear el acceso de otra direcciones
 @CrossOrigin("*")
@@ -25,7 +25,7 @@ public class ProductController {
 
 	// INYECTAMOS CLASE
 	@Autowired
-	BuscadorService bs;
+	ProductosService bs;
 	
 	//La notación body indica que el return se mete en el cuerpo de la respuesta
 	//Con la propiedad produces indicas que el cuerpo se formatea a json

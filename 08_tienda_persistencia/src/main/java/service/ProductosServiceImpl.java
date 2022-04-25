@@ -17,7 +17,7 @@ import model.Producto;
 
 //Instancia una clase mediante Spring
 @Service
-public class BuscadorServiceImpl implements BuscadorService {
+public class ProductosServiceImpl implements ProductosService {
 	//Inyecta Entity Manager
 	@PersistenceContext
 	EntityManager entityManager;
