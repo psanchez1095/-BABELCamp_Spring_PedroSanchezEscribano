@@ -44,4 +44,11 @@ public interface ProductosService {
 	 * @param p parametro de tipo Producto a modificar 
 	 * */
 	void modificar(Producto p);
+	
+	/** 
+	 * Metodo que se encargar de conseguir la media de precio para una seccion
+	 * @param seccion parametro de tipo String
+	 * @return Devuelve un double que es la media 
+	 * */
+	double precioMedioSeccion(String seccion);
 }
