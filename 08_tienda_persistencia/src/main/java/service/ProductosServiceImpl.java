@@ -85,7 +85,7 @@ public class ProductosServiceImpl implements ProductosService {
 
 	@Override
 	public double precioMedioSeccion(String seccion) {
-		String jpql="select avg(p.precio) from Producto p where p.nombre  =: seccion";
+		String jpql="select avg(p.precio) from Producto p where p.seccion  =: seccion";
 		TypedQuery<Double> query = entityManager.createNamedQuery(jpql, Double.class);
 		query.setParameter("seccion", seccion);
 		return query.getSingleResult();
