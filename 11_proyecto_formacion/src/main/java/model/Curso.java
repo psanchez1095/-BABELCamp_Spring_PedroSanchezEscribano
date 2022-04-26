@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,7 +28,7 @@ public class Curso {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCurso;
-	private String denominacion;
+	private String nombre;
 	private int duracion;
 	private double precio;
 	@Temporal(TemporalType.DATE)
@@ -35,10 +36,10 @@ public class Curso {
 	@ManyToMany(mappedBy="cursos")
 	private List<Alumno> alumnos;
 	
-	public Curso(int idCurso, String denominacion, int duracion, double precio, Date fechaInicio) {
+	public Curso(int idCurso, String nombre, int duracion, double precio, Date fechaInicio) {
 		super();
 		this.idCurso = idCurso;
-		this.denominacion = denominacion;
+		this.nombre = nombre;
 		this.duracion = duracion;
 		this.precio = precio;
 		this.fechaInicio = fechaInicio;

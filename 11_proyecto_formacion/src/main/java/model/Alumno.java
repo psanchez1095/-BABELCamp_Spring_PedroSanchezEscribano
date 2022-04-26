@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -29,8 +30,10 @@ public class Alumno {
 	private int edad;
 
 	@ManyToMany()
-	@JoinTable(name = "matriculas", joinColumns = @JoinColumn(name = "usuario", referencedColumnName = "usuario"), inverseJoinColumns = @JoinColumn(name = "idCurso", referencedColumnName = "idCurso"))
-	private List<Curso> cuentas;
+	@JoinTable(name = "matriculas",
+	joinColumns = @JoinColumn(name = "usuario", referencedColumnName = "usuario"),
+	inverseJoinColumns = @JoinColumn(name = "idCurso", referencedColumnName = "idCurso"))
+	private List<Curso> cursos;
 
 	public Alumno(String usuario, String password, String nombre, String email, int edad) {
 		super();
