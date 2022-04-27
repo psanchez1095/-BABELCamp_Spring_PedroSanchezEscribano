@@ -3,94 +3,87 @@ package service;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import dao.AlumnosDao;
+import dao.AlumnosDaoImp;
+import dao.CursosDao;
+import dao.CursosDaoImp;
 import model.Alumno;
 import model.Curso;
 
 @Service
 public class FormacionServiceImp implements FormacionService {
-	@PersistenceContext
-	EntityManager entityManager;
+
+	
+	CursosDao daoCursos;
+	AlumnosDao daoAlumnos;
+	
+	public FormacionServiceImp(@Autowired CursosDao daoCursos, @Autowired AlumnosDao daoAlumnos) {
+		super();
+		this.daoCursos = daoCursos;
+		this.daoAlumnos = daoAlumnos;
+	}
 
 	@Override
 	public List<String> cursos() {
-		String jpql = "select distinct(c.nombre) from Curso c";
-		TypedQuery<String> query;
-		query = entityManager.createQuery(jpql, String.class);
-
-		List<String> list = query.getResultList();
+		List<String> list = daoCursos.findAll();
 		return list.size() > 0 ? list : null;
 	}
 
 	@Override
 	public List<Alumno> alumnosCurso(String nombreCurso) {
-
-		String jpql = "select a from Alumno a join a.cursos c where c.nombre=:nombre";
-		TypedQuery<Alumno> query;
-		query = entityManager.createQuery(jpql, Alumno.class);
-		query.setParameter(1, nombreCurso);
-
-		List<Alumno> list = query.getResultList();
+		List<Alumno> list = daoAlumnos.findByCurso(nombreCurso);
 		return list.size() > 0 ? list : null;
 	}
 
 	@Override
 	public List<Curso> cursoMatriculadoAlumno(String usuario) {
-		String jpql = "select distinct(c) from Curso c join c.alumnos a where a.usuario =?1";
-		TypedQuery<Curso> query;
-		query = entityManager.createQuery(jpql, Curso.class);
-		query.setParameter(1, usuario);
-		List<Curso> list = query.getResultList();
+		List<Curso> list = daoCursos.findByAlumno(usuario);
 		return list.size() > 0 ? list : null;
 	}
 
 	@Override
 	public Alumno validarUsuario(String usuario, String contraseña) {
-		String jpql = "select a from Alumno a where a.usuario =?1 and a.password=?2 ";
-		TypedQuery<Alumno> query;
-		query = entityManager.createQuery(jpql, Alumno.class);
-		query.setParameter(1, usuario);
-		query.setParameter(2, contraseña);
+		return daoAlumnos.findByUsuarioAndPassword(usuario, contraseña);
+	}
 
-		List<Alumno> list = query.getResultList();
-		return list.size() > 0 ? list.get(0) : null;
+	
+	@Override
+	@Transactional
+	public boolean matricularAlumno(String usuario, int idCurso) {
+		Alumno alumno = daoAlumnos.findById(usuario);
+		Curso curso = daoCursos.findById(idCurso);
+		
+		if (alumno != null && curso != null) {
+			System.out.println(alumno+"   "+curso);
+			alumno.getCursos().add(curso);
+			daoAlumnos.update(alumno);
+			return true;
+		}
+		else return false;
 	}
 
 	@Override
 	public Alumno buscarAlumno(String usuario) {
-		String jpql = "select a from Alumno a where a.usuario =?1";
-		TypedQuery<Alumno> query;
-		query = entityManager.createQuery(jpql, Alumno.class);
-		query.setParameter(1, usuario);
-		List<Alumno> list = query.getResultList();
-		return list.size() > 0 ? list.get(0) : null;
-	}
-	
-	@Transactional
-	@Override
-	public boolean matricularAlumno(String usuario, int idCurso) {
-		
-		Alumno auxA = buscarAlumno(usuario);
-		Curso auxC = buscarCurso(idCurso);
-		auxA.getCursos().add(auxC);
-		entityManager.merge(auxA);
-		
-		return true;
-		
+		return daoAlumnos.findById(usuario);
 	}
 
 	@Override
 	public Curso buscarCurso(int id) {
-		String jpql = "select c from Curso c where c.idCurso =?1";
-		TypedQuery<Curso> query;
-		query = entityManager.createQuery(jpql, Curso.class);
-		query.setParameter(1, id);
-		List<Curso> list = query.getResultList();
-		return list.size() > 0 ? list.get(0) : null;
+		return daoCursos.findById(id);
+
+	}
+
+	@Override
+	public List<Alumno> alumnos() {
+		List<Alumno> list = daoAlumnos.findAll();
+		return list.size() > 0 ? list : null;
 	}
 }

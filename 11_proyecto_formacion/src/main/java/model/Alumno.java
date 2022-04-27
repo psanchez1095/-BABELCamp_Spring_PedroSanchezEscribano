@@ -3,12 +3,15 @@ package model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +32,8 @@ public class Alumno {
 	private String email;
 	private int edad;
 
-	@ManyToMany()
+	@JsonIgnore
+	@ManyToMany
 	@JoinTable(name = "matriculas",
 	joinColumns = @JoinColumn(name = "usuario", referencedColumnName = "usuario"),
 	inverseJoinColumns = @JoinColumn(name = "idCurso", referencedColumnName = "idCurso"))

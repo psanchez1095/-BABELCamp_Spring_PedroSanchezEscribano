@@ -31,9 +31,4 @@ public class TestFormacionService {
 		assertNotEquals(null,service.cursos());
 	}
 	
-
-	@Test void testMatricula() {
-		assertEquals(true,service.matricularAlumno("admin",8));
-		
-	}
 }
