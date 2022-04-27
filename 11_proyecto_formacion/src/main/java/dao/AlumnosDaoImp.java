@@ -22,7 +22,7 @@ public class AlumnosDaoImp implements AlumnosDao {
 		String jpql = "select a from Alumno a join a.cursos c where c.nombre=:nombre";
 		TypedQuery<Alumno> query;
 		query = entityManager.createQuery(jpql, Alumno.class);
-		query.setParameter(1, nombreCurso);
+		query.setParameter("nombre", nombreCurso);
 
 		return query.getResultList();
 		
