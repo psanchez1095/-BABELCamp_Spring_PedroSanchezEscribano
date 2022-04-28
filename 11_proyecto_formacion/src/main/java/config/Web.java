@@ -27,6 +27,8 @@ public class Web implements WebApplicationInitializer {
       filter.setInitParameter("encoding", "UTF-8");
       filter.setInitParameter("forceEncoding", "true");
       //filter.addMappingForUrlPatterns(DispatcherType., true, "/*")
+      //filter.addMappingForUrlPatterns(null,false,"/*");
+
       
     }
  }
