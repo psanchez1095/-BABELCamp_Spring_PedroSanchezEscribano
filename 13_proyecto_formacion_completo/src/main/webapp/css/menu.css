@@ -1,0 +1,33 @@
+@charset "ISO-8859-1";
+
+/*Fuente de Google Fonts*/
+@import
+	url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
+/*Quitar margin y padding por defecto*/
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: ghostwhite;
+}
+h2{
+	text-align : center;
+	font-family: 'Satisfy', cursive;
+	margin-top:2%;
+	margin-bottom:2%;
+}
+a{
+	color:white;
+}
+.divMenu{
+	width:50%;
+	display:flex;
+	flex-direction:row;
+	margin-left:25%;
+	background-color:darkslateblue;
+	padding: 2%;
+	border-radius:10%;
+}
