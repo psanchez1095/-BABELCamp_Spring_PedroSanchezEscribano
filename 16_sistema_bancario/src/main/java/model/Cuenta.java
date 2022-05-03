@@ -33,8 +33,11 @@ public class Cuenta {
 	private int numeroCuenta;
 	private int  saldo;
 	private String tipocuenta;
-	@OneToMany(mappedBy="cuenta")
-	private List<Titular> matriculas;
+	
+	@OneToMany(mappedBy = "cuenta")
+	private List<Movimiento> movimientos;
+	@OneToMany(mappedBy="cliente")
+	private List<Titular> titulares;
 	
 	public Cuenta(int numeroCuenta, int saldo, String tipocuenta) {
 		super();

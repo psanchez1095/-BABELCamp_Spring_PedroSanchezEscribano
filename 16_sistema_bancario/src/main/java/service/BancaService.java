@@ -2,17 +2,15 @@ package service;
 
 import java.util.Date;
 import java.util.List;
-
-import dtos.ClienteDto;
 import dtos.CuentaDto;
 import dtos.MovimientoDto;
-import dtos.TitularDto;
+
 
 public interface BancaService {
 	
-   CuentaDto validarCuenta(int numeroCuenta);
+   CuentaDto validateAccount(int numeroCuenta);
    
-   List<MovimientoDto> consultarMovimientos(Date start, Date end);
+   List<MovimientoDto> consultMovements(Date start, Date end,int numeroCuenta);
 
    boolean depositSaldo(int numeroCuenta, int cantidad);
 

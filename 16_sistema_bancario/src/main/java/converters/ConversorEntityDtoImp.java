@@ -46,12 +46,12 @@ public class ConversorEntityDtoImp implements ConversorEntityDto {
 
 	@Override
 	public MovimientoDto movimientoToDto(Movimiento movimiento) {
-		return new MovimientoDto(movimiento.getIdMovimiento(),cuentaToDto(movimiento.getCuenta()),movimiento.getFecha(),movimiento.getCantidad(),movimiento.getOperacion());
+		return new MovimientoDto(movimiento.getIdMovimiento(),movimiento.getIdCuenta(),cuentaToDto(movimiento.getCuenta()),movimiento.getFecha(),movimiento.getCantidad(),movimiento.getOperacion());
 	}
 
 	@Override
 	public Movimiento dtoToMovimiento(MovimientoDto dto) {
-		return new Movimiento(dto.getIdMovimiento(),dto.getFecha(),dto.getCantidad(),dto.getOperacion(),dtoToCuenta(dto.getCuentaDto()));
+		return new Movimiento(dto.getIdMovimiento(), dto.getIdCuenta(), dto.getFecha(), dto.getCantidad(), dto.getOperacion(), dtoToCuenta(dto.getCuentaDto()));
 	}
 
 	

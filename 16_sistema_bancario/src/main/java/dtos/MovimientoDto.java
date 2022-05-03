@@ -12,7 +12,9 @@ import lombok.Setter;
 @Setter
 @Getter
 public class MovimientoDto {
+
 	private int idMovimiento;
+	private int idCuenta;
 	private CuentaDto cuentaDto;
 	private Date fecha;
 	private int cantidad;

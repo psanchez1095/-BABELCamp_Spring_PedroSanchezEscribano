@@ -11,9 +11,9 @@
 	
 			<h1>ACCESO A BANCA</h1>
 
-			<div id="divContentDer">
+			<div id="divCenter">
 
-				<form action="Validar" method="post">
+				<form action="Validate" method="post">
 				
 					<h2>Numero de Cuenta</h2>
 					<span><input class="inputWidth"type="text" name="numeroCuenta" placeholder="Numero De Cuenta" required /></span>

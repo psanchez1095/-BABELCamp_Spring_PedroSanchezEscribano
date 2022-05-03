@@ -7,64 +7,104 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import converters.ConversorEntityDto;
 import dao.ClientesDao;
 import dao.CuentasDao;
+import dao.MovimientosDao;
 import dao.TitularesDao;
-import dtos.ClienteDto;
 import dtos.CuentaDto;
 import dtos.MovimientoDto;
-import dtos.TitularDto;
-import model.Cliente;
 import model.Cuenta;
-import model.Titular;
-import model.TitularPk;
+import model.Movimiento;
+
 
 @Service
 public class BancaServiceImp implements BancaService {
 
-	@Autowired(required = true)
+	@Autowired
 	ConversorEntityDto conversor;
 	CuentasDao daoCuentas;
 	ClientesDao daoClientes;
-	TitularesDao daoMatriculas;
+	TitularesDao daoTitulares;
+	MovimientosDao daoMovimientos;
 
 	public BancaServiceImp(@Autowired CuentasDao daoCuentas, @Autowired ClientesDao daoClientes,
-			@Autowired TitularesDao daoMatriculas) {
+			@Autowired TitularesDao daoTitulares, @Autowired MovimientosDao daoMovimientos) {
 		super();
 		this.daoCuentas = daoCuentas;
 		this.daoClientes = daoClientes;
-		this.daoMatriculas = daoMatriculas;
+		this.daoTitulares = daoTitulares;
+		this.daoMovimientos = daoMovimientos;
 	}
 
 	@Override
-	public CuentaDto validarCuenta(int numeroCuenta) {
+	public CuentaDto validateAccount(int numeroCuenta) {
 		return conversor.cuentaToDto(daoCuentas.findByNumeroCuenta(numeroCuenta));
 	}
 
 	@Override
-	public List<MovimientoDto> consultarMovimientos(Date start, Date end) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MovimientoDto> consultMovements(Date start, Date end, int numeroCuenta) {
+
+		return daoMovimientos.findByMovimientosByRange(numeroCuenta, start, end).stream()
+				.map(mov -> conversor.movimientoToDto(mov)).collect(Collectors.toList());
+
 	}
 
 	@Override
 	public boolean depositSaldo(int numeroCuenta, int cantidad) {
-		// TODO Auto-generated method stub
+
+		Optional<Cuenta> cuenta = daoCuentas.findById(numeroCuenta);
+
+		if (cuenta.isPresent()) {
+
+			Movimiento m = new Movimiento(numeroCuenta, new Date(), cantidad, "Deposit");
+			daoMovimientos.save(m);
+			cuenta.get().setSaldo(cuenta.get().getSaldo() + cantidad);
+			daoCuentas.save(cuenta.get());
+
+			return true;
+
+		}
 		return false;
 	}
 
 	@Override
 	public boolean drawSaldo(int numeroCuenta, int cantidad) {
-		// TODO Auto-generated method stub
+
+		Optional<Cuenta> cuenta = daoCuentas.findById(numeroCuenta);
+
+		if (cuenta.isPresent()) {
+
+			Movimiento m = new Movimiento(numeroCuenta, new Date(), cantidad, "Draw");
+			daoMovimientos.save(m);
+			cuenta.get().setSaldo(cuenta.get().getSaldo() - cantidad);
+			daoCuentas.save(cuenta.get());
+
+			return true;
+		}
 		return false;
 	}
 
 	@Override
-	public boolean transferSaldo(int numeroCuenta, int toNumeroCuenta, int cantidad) {
-		// TODO Auto-generated method stub
+	public boolean transferSaldo(int numeroCuentaOrigen, int numeroCuentaDest, int cantidad) {
+
+		Optional<Cuenta> cuentaOrigen = daoCuentas.findById(numeroCuentaOrigen);
+		Optional<Cuenta> cuentaDest = daoCuentas.findById(numeroCuentaDest);
+
+		if (cuentaOrigen.isPresent() && cuentaDest.isPresent()) {
+
+			Movimiento m = new Movimiento(numeroCuentaOrigen, new Date(), cantidad, "Transfer");
+			daoMovimientos.save(m);
+
+			cuentaOrigen.get().setSaldo(cuentaOrigen.get().getSaldo() - cantidad);
+			cuentaDest.get().setSaldo(cuentaDest.get().getSaldo() + cantidad);
+			daoCuentas.save(cuentaOrigen.get());
+			daoCuentas.save(cuentaDest.get());
+
+			return true;
+		}
 		return false;
 	}
 

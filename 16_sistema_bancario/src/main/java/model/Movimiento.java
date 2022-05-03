@@ -26,6 +26,7 @@ public class Movimiento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idMovimiento;
+	private int idCuenta;
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	private int cantidad;
@@ -33,5 +34,14 @@ public class Movimiento {
 	@ManyToOne()
 	@JoinColumn(name = "idCuenta", referencedColumnName = "numeroCuenta", insertable = false, updatable = false)
 	Cuenta cuenta;
+	
+	public Movimiento(int idCuenta, Date fecha, int cantidad, String operacion) {
+		super();
+		this.idCuenta = idCuenta;
+		this.fecha = fecha;
+		this.cantidad = cantidad;
+		this.operacion = operacion;
+	}
+	
 	
 }

@@ -11,11 +11,11 @@
 <h1>INDEX BANCA</h1>
 <div class="divMenu">
     <div class="rowStructure">
-      <a href="">Ingresar Dinero</a>
-      <a href="">Retirar Dinero</a>
+      <a href="deposit.jsp">Ingresar Dinero</a>
+      <a href="draw.jsp">Retirar Dinero</a>
     </div>
     <div class="rowStructure">
-       <a href="">Transferir Dinero</a>	
+       <a href="transfer.jsp">Transferir Dinero</a>	
     </div>
       <div class="rowStructure">
     <a href="">Consular Movimientos</a>
