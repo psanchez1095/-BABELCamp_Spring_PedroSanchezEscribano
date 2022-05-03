@@ -15,9 +15,7 @@ import model.Cliente;
 @Getter
 public class CuentaDto {
 	
-	private int idCurso;
-	private String nombre;
-	private int duracion;
-	private double precio;
-	private Date fechaInicio;
+	private int numeroCuenta;
+	private int  saldo;
+	private String tipocuenta;
 }

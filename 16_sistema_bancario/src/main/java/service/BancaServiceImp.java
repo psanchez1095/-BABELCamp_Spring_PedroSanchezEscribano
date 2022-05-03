@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import converters.ConversorEntityDto;
 import dao.ClientesDao;
 import dao.CuentasDao;
 import dao.TitularesDao;
 import dtos.ClienteDto;
 import dtos.CuentaDto;
+import dtos.MovimientoDto;
 import dtos.TitularDto;
 import model.Cliente;
 import model.Cuenta;
@@ -23,7 +25,8 @@ import model.TitularPk;
 @Service
 public class BancaServiceImp implements BancaService {
 
-	@Autowired
+	@Autowired (required=true)
+	ConversorEntityDto conversor;
 	CuentasDao daoCuentas;
 	ClientesDao daoClientes;
 	TitularesDao daoMatriculas;
@@ -37,79 +40,30 @@ public class BancaServiceImp implements BancaService {
 	}
 
 	@Override
-	public List<ClienteDto> alumnosCurso(String nombreCurso) {
-		// TODO Auto-generated method stub
-		return null;
+	public CuentaDto validarCuenta(int numeroCuenta) {
+		return conversor.cuentaToDto(daoCuentas.findByNumeroCuenta(numeroCuenta));
 	}
 
 	@Override
-	public List<CuentaDto> cursoMatriculadoAlumno(String usuario) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ClienteDto validarUsuario(String usuario, String contraseña) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<CuentaDto> cursos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ClienteDto> alumnos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean añadirTitular(int idCuenta, int idCliente) {
+	public boolean ingresar(int numeroCuenta, int cantidad) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public ClienteDto buscarAlumno(String usuario) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CuentaDto buscarCurso(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CuentaDto buscarCurso(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean altaAlumno(ClienteDto a) {
+	public boolean extraccion(int numeroCuenta, int cantidad) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean altaCurso(CuentaDto a) {
+	public boolean transferencia(int numeroCuenta, int toNumeroCuenta, int cantidad) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List<TitularDto> matriculasByRange(Date ini, Date end) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<CuentaDto> cursoNoMatriculadoAlumno(String usuario) {
+	public List<MovimientoDto> consultarMovimientos(Date start, Date end) {
 		// TODO Auto-generated method stub
 		return null;
 	}
