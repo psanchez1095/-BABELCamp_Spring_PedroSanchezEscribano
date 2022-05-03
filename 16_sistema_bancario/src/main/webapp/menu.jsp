@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Index Banca</title>
 <link rel="stylesheet"  href="css/login.css">
 </head>
 <body>
-<h1>ACCESO A BANCA</h1>
+<h1>INDEX BANCA</h1>
 </body>
 </html>
