@@ -94,7 +94,6 @@ public class FormacionController {
 			@RequestParam("fechaIni") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaIni,
 			@RequestParam("fechaFin") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin,
 			HttpServletRequest request) {
-		System.out.println(fechaIni);
 		return fs.matriculasByRange(fechaIni, fechaFin);
 
 	}
@@ -102,7 +101,7 @@ public class FormacionController {
 	@PostMapping(value = "Matricular")
 	public String matricular(@RequestParam("idCurso") int idCurso, @RequestParam("usuario") String usuario) {
 		fs.matricularAlumno(usuario, idCurso);
-		return "index";
+		return "menu";
 	}
 	@GetMapping(value = "routeAltaAlumno")
 	public String routeAltaAlumno(
