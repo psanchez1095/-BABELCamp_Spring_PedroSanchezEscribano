@@ -20,4 +20,14 @@ public class CursoDto {
 	private int duracion;
 	private double precio;
 	private Date fechaInicio;
+	
+	public CursoDto(String nombre, int duracion, double precio,Date fechaInicio) {
+		super();
+		this.nombre = nombre;
+		this.duracion = duracion;
+		this.precio = precio;
+		this.fechaInicio = fechaInicio;
+		
+	}
+	
 }

@@ -29,6 +29,7 @@ import lombok.Setter;
 @Entity
 @Table(name="cursos")
 public class Curso {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCurso;
@@ -48,6 +49,5 @@ public class Curso {
 		this.precio = precio;
 		this.fechaInicio = fechaInicio;
 	}
-	
-	
+		
 }

@@ -98,7 +98,8 @@ public class FormacionServiceImp implements FormacionService {
 
 	@Override
 	public boolean altaAlumno(AlumnoDto a) {
-		if (daoAlumnos.findById(a.getUsuario()) != null) {
+		System.out.println(daoAlumnos.findById(a.getUsuario()));
+		if (daoAlumnos.findById(a.getUsuario()).isEmpty()) {
 			daoAlumnos.save(conversor.dtoToAlumno(a));
 			return true;
 		}
@@ -107,7 +108,7 @@ public class FormacionServiceImp implements FormacionService {
 
 	@Override
 	public boolean altaCurso(CursoDto c) {
-		if (daoCursos.findByNombre(c.getNombre()) != null) {
+		if (daoCursos.findByNombre(c.getNombre()) == null) {
 			daoCursos.save(conversor.dtoToCurso(c));
 			return true;
 		}

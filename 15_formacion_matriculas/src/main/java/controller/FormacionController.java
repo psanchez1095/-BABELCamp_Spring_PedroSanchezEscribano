@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import dtos.AlumnoDto;
 import dtos.CursoDto;
 import dtos.MatriculaDto;
-import model.Alumno;
-import model.Curso;
 import service.FormacionService;
 
 @CrossOrigin("*")
@@ -82,8 +80,8 @@ public class FormacionController {
 
 	// NUEVO
 	@PostMapping(value = "AltaCurso")
-	public String añadirCurso(@ModelAttribute CursoDto c) {
-		boolean ok = fs.altaCurso(c);
+	public String añadirCurso(@RequestParam("nombre") String nombre, @RequestParam("duracion") int duracion, @RequestParam("precio") double precio, @RequestParam("fechaInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio) {
+		boolean ok = fs.altaCurso(new CursoDto(nombre,duracion,precio,fechaInicio));
 		if (ok)
 			return "menu";
 		else
@@ -96,12 +94,26 @@ public class FormacionController {
 			@RequestParam("fechaIni") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaIni,
 			@RequestParam("fechaFin") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin,
 			HttpServletRequest request) {
+		System.out.println(fechaIni);
 		return fs.matriculasByRange(fechaIni, fechaFin);
 
 	}
-	@PostMapping(value="Matricular")
-	public String matricular( @RequestParam("idCurso") int idCurso,@RequestParam("usuario") String usuario) {
+
+	@PostMapping(value = "Matricular")
+	public String matricular(@RequestParam("idCurso") int idCurso, @RequestParam("usuario") String usuario) {
 		fs.matricularAlumno(usuario, idCurso);
 		return "index";
 	}
+	@GetMapping(value = "routeAltaAlumno")
+	public String routeAltaAlumno(
+			HttpServletRequest request) {
+		return "altaAlumno";
+	}
+	@GetMapping(value = "routeAltaCurso")
+	public String routeAltaCurso(
+			HttpServletRequest request) {
+		return "altaCurso";
+	}
+
+	
 }
