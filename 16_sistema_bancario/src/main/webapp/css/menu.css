@@ -1,9 +1,8 @@
-@charset "ISO-8859-1";
-
 /*Fuente de Google Fonts*/
 @import
 	url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
-
+    @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Teko:wght@300&display=swap');
 /*Quitar margin y padding por defecto*/
 * {
 	margin: 0;
@@ -11,32 +10,54 @@
 }
 
 body {
-	background-color: ghostwhite;
+	background-color:rgb(42, 31, 112);
 }
-h2{
-	text-align : center;
-	font-family: 'Satisfy', cursive;
-	margin-top:2%;
-	margin-bottom:2%;
-}
+
 h1{
 	text-align : center;
 	font-family: 'Satisfy', cursive;
 	margin-top:2%;
 	margin-bottom:2%;
+	color:white;
 }
+
 a{
 	color:white;
 }
+
 .divMenu{
 	width:50%;
-	display:flex;
-	flex-direction:row;
 	margin-left:25%;
-	background-color:darkslateblue;
+	 background-color:darkslateblue;
 	padding: 2%;
 	border-radius:10%;
 }
-body{
-	 background-color:rgb(42, 31, 112);
+
+input{
+	width:25%;
+    padding: 1%;
+    font-family: 'Teko', sans-serif;
+    font-size: x-large;
+    background-color: white;
+    color: darkslateblue;
+    margin-right: 2%;
+}
+
+.rowStructure{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: 2%;
+}
+
+.rowStructure>a{
+	text-align: center;
+	width:23%;
+    padding: 1%;
+    font-family: 'Teko', sans-serif;
+    font-size: x-large;
+    background-color: white;
+    color: darkslateblue;
+    margin-right: 2%;
+	text-decoration: none;
 }

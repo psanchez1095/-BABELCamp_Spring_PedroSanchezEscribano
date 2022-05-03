@@ -10,6 +10,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class TitularDto {
-	private CuentaDto cursoDto;
+	private CuentaDto cuentaDto;
 	private ClienteDto alumnoDto;
 }

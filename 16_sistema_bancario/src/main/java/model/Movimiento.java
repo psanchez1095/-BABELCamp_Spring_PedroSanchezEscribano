@@ -33,4 +33,5 @@ public class Movimiento {
 	@ManyToOne()
 	@JoinColumn(name = "idCuenta", referencedColumnName = "numeroCuenta", insertable = false, updatable = false)
 	Cuenta cuenta;
+	
 }

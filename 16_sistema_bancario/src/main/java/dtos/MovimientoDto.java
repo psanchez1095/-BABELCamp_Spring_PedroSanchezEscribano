@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 public class MovimientoDto {
 	private int idMovimiento;
-	private CuentaDto idCuenta;
+	private CuentaDto cuentaDto;
 	private Date fecha;
 	private int cantidad;
 	private String operacion;

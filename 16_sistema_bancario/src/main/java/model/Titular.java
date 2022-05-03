@@ -37,7 +37,7 @@ public class Titular {
     public Titular(int nota) {
 		super();
 	}
-    public Titular( Cuenta cuenta, Cliente cliente,double nota) {
+    public Titular( Cuenta cuenta, Cliente cliente) {
 		super();
 		this.cuenta = cuenta;
 		this.cliente = cliente;
