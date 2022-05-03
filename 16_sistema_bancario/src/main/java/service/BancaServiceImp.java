@@ -25,7 +25,7 @@ import model.TitularPk;
 @Service
 public class BancaServiceImp implements BancaService {
 
-	@Autowired (required=true)
+	@Autowired(required = true)
 	ConversorEntityDto conversor;
 	CuentasDao daoCuentas;
 	ClientesDao daoClientes;
@@ -45,29 +45,27 @@ public class BancaServiceImp implements BancaService {
 	}
 
 	@Override
-	public boolean ingresar(int numeroCuenta, int cantidad) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean extraccion(int numeroCuenta, int cantidad) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean transferencia(int numeroCuenta, int toNumeroCuenta, int cantidad) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public List<MovimientoDto> consultarMovimientos(Date start, Date end) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public boolean depositSaldo(int numeroCuenta, int cantidad) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
+	@Override
+	public boolean drawSaldo(int numeroCuenta, int cantidad) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean transferSaldo(int numeroCuenta, int toNumeroCuenta, int cantidad) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

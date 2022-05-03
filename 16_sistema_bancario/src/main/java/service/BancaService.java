@@ -9,15 +9,15 @@ import dtos.MovimientoDto;
 import dtos.TitularDto;
 
 public interface BancaService {
-
-   CuentaDto validarCuenta(int numeroCuenta);
-
-   boolean ingresar(int numeroCuenta, int cantidad);
-
-   boolean extraccion(int numeroCuenta, int cantidad);
-
-   boolean transferencia(int numeroCuenta, int toNumeroCuenta, int cantidad);
-
-   List<MovimientoDto> consultarMovimientos(Date start, Date end);
 	
+   CuentaDto validarCuenta(int numeroCuenta);
+   
+   List<MovimientoDto> consultarMovimientos(Date start, Date end);
+
+   boolean depositSaldo(int numeroCuenta, int cantidad);
+
+   boolean drawSaldo(int numeroCuenta, int cantidad);
+
+   boolean transferSaldo(int numeroCuenta, int toNumeroCuenta, int cantidad);
+
 }
