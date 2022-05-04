@@ -6,6 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Transferir Dinero</title>
 <link rel="stylesheet" href="css/alta.css">
+<link rel="icon" href="css/banco.png" type="image/x-icon">
 </head>
 <body>
 	<div class="divAlta">

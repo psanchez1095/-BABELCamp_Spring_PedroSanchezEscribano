@@ -44,3 +44,6 @@ input{
     margin-right: 2%;
     margin-bottom: 2%;
 }
+.error{
+	color:red;
+}

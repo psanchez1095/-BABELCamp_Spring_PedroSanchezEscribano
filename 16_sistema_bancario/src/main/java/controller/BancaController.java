@@ -26,8 +26,8 @@ public class BancaController {
 
 	@PostMapping(value = "Validate")
 	public String validarUsuario(@RequestParam("numeroCuenta") int numCuenta) {
-		bancaService.validateAccount(numCuenta);
-		return "menu";
+		if (bancaService.validateAccount(numCuenta)!=null)return "menu";
+		else return "error";
 	}
 	
 	@PostMapping(value="Deposit")

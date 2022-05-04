@@ -13,7 +13,6 @@ import converters.ConversorEntityDto;
 import dao.ClientesDao;
 import dao.CuentasDao;
 import dao.MovimientosDao;
-import dao.TitularesDao;
 import dtos.CuentaDto;
 import dtos.MovimientoDto;
 import model.Cuenta;
@@ -27,29 +26,26 @@ public class BancaServiceImp implements BancaService {
 	ConversorEntityDto conversor;
 	CuentasDao daoCuentas;
 	ClientesDao daoClientes;
-	TitularesDao daoTitulares;
 	MovimientosDao daoMovimientos;
 
 	public BancaServiceImp(@Autowired CuentasDao daoCuentas, @Autowired ClientesDao daoClientes,
-			@Autowired TitularesDao daoTitulares, @Autowired MovimientosDao daoMovimientos) {
+			@Autowired MovimientosDao daoMovimientos) {
 		super();
 		this.daoCuentas = daoCuentas;
 		this.daoClientes = daoClientes;
-		this.daoTitulares = daoTitulares;
 		this.daoMovimientos = daoMovimientos;
 	}
 
 	@Override
 	public CuentaDto validateAccount(int numeroCuenta) {
-		return conversor.cuentaToDto(daoCuentas.findByNumeroCuenta(numeroCuenta));
+		Cuenta c = daoCuentas.findByNumeroCuenta(numeroCuenta);
+		if ( c!= null)return conversor.cuentaToDto(daoCuentas.findByNumeroCuenta(numeroCuenta));
+		else return null;
 	}
 
 	@Override
 	public List<MovimientoDto> consultMovements(Date start, Date end, int numeroCuenta) {
-
-		return daoMovimientos.findByMovimientosByRange(numeroCuenta, start, end).stream()
-				.map(mov -> conversor.movimientoToDto(mov)).collect(Collectors.toList());
-
+		return daoMovimientos.findByCuentaNumeroCuentaAndFechaBetween(numeroCuenta, start, end).stream().map(mov->conversor.movimientoToDto(mov)).collect(Collectors.toList());
 	}
 
 	@Override

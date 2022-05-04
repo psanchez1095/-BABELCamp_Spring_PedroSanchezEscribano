@@ -6,6 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Index Banca</title>
 <link rel="stylesheet"  href="css/menu.css">
+<link rel="icon" href="css/banco.png" type="image/x-icon">
 </head>
 <body>
 <h1>INDEX BANCA</h1>
@@ -18,7 +19,7 @@
        <a href="transfer.jsp">Transferir Dinero</a>	
     </div>
       <div class="rowStructure">
-    <a href="">Consular Movimientos</a>
+    <a href="consultMovements.jsp">Consular Movimientos</a>
      </div>
 
   </div>

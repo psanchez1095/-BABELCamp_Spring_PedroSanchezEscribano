@@ -6,6 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Login Page</title>
 <link rel="stylesheet"  href="css/login.css">
+<link rel="icon" href="css/banco.png" type="image/x-icon">
 </head>
 <body>
 	
