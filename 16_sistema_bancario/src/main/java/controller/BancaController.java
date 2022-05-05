@@ -65,8 +65,8 @@ public class BancaController {
 	
 	
 	@GetMapping(value = "ConsultaMovimientos", produces = MediaType.APPLICATION_JSON_VALUE )
-	public @ResponseBody List<MovimientoDto> movimientos(@RequestParam("numeroCuenta")int numeroCuenta, @DateTimeFormat(pattern ="yyyy-MM-dd") @RequestParam("dateIni") Date dateIni,
-			@DateTimeFormat(pattern ="yyyy-MM-dd") @RequestParam("dateEnd") Date dateEnd) {
+	public @ResponseBody List<MovimientoDto> movimientos(@RequestParam("numeroCuenta")int numeroCuenta, @DateTimeFormat(pattern ="yyyy-MM-dd") @RequestParam("fechaIni") Date dateIni,
+			@DateTimeFormat(pattern ="yyyy-MM-dd") @RequestParam("fechaFin") Date dateEnd) {
 		
 		return bancaService.consultMovements(dateIni, dateEnd,numeroCuenta);
 	}
